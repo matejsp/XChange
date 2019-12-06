@@ -80,7 +80,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
   public BitfinexOrderStatusResponse placeBitfinexMarketOrder(
       MarketOrder marketOrder, BitfinexOrderType bitfinexOrderType) throws IOException {
 
-    String pair = BitfinexUtils.toPairString(marketOrder.getCurrencyPair());
+    String pair = BitfinexUtils.toPairStringV1(marketOrder.getCurrencyPair());
     String type =
         (marketOrder.getType().equals(OrderType.BID)
                 || marketOrder.getType().equals(OrderType.EXIT_ASK))
@@ -124,7 +124,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
       LimitOrder limitOrder, BitfinexOrderType bitfinexOrderType, long replaceOrderId)
       throws IOException {
 
-    String pair = BitfinexUtils.toPairString(limitOrder.getCurrencyPair());
+    String pair = BitfinexUtils.toPairStringV1(limitOrder.getCurrencyPair());
     String type =
         (limitOrder.getType().equals(Order.OrderType.BID)
                 || limitOrder.getType().equals(Order.OrderType.EXIT_ASK))
@@ -200,7 +200,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
       Order o = orders.get(i);
       if (o instanceof LimitOrder) {
         LimitOrder limitOrder = (LimitOrder) o;
-        String pair = BitfinexUtils.toPairString(limitOrder.getCurrencyPair());
+        String pair = BitfinexUtils.toPairStringV1(limitOrder.getCurrencyPair());
         String type =
             (limitOrder.getType().equals(OrderType.BID)
                     || limitOrder.getType().equals(OrderType.EXIT_ASK))
@@ -217,7 +217,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
                 limitOrder.getLimitPrice());
       } else if (o instanceof MarketOrder) {
         MarketOrder marketOrder = (MarketOrder) o;
-        String pair = BitfinexUtils.toPairString(marketOrder.getCurrencyPair());
+        String pair = BitfinexUtils.toPairStringV1(marketOrder.getCurrencyPair());
         String type =
             (marketOrder.getType().equals(OrderType.BID)
                     || marketOrder.getType().equals(OrderType.EXIT_ASK))
