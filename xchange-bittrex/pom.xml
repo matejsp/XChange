@@ -5,8 +5,10 @@
     <parent>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-parent</artifactId>
-        <version>4.4.2-SNAPSHOT</version>
+        <version>4.4.1</version>
     </parent>
+
+    <version>4.4.2-ICN</version>
 
     <artifactId>xchange-bittrex</artifactId>
 
@@ -27,7 +29,7 @@
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
-            <version>${project.version}</version>
+            <version>4.4.1</version>
         </dependency>
 
         <dependency>
@@ -35,5 +37,26 @@
             <artifactId>wiremock</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
