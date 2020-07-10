@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>xchange-huobi</artifactId>
-    <version>5.0.0-ICN1</version>
+    <version>5.0.0-ICN2</version>
 
     <name>XChange Huobi</name>
     <description>XChange implementation for the Huobi Exchange</description>
