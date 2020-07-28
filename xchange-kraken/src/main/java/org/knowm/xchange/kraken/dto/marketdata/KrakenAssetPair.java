@@ -23,6 +23,7 @@ public class KrakenAssetPair {
   private final String feeVolumeCurrency;
   private final BigDecimal marginCall;
   private final BigDecimal marginStop;
+  private final BigDecimal minimumOrderVolume;
 
   /**
    * Constructor
@@ -59,7 +60,8 @@ public class KrakenAssetPair {
       @JsonProperty("margin_call") BigDecimal marginCall,
       @JsonProperty("margin_stop") BigDecimal marginStop,
       @JsonProperty("leverage_buy") List<String> leverage_buy,
-      @JsonProperty("leverage_sell") List<String> leverage_sell) {
+      @JsonProperty("leverage_sell") List<String> leverage_sell,
+      @JsonProperty("ordermin") BigDecimal minimumOrderVolume) {
 
     this.altName = altName;
     this.wsName = wsName;
@@ -78,6 +80,7 @@ public class KrakenAssetPair {
     this.feeVolumeCurrency = feeVolumeCurrency;
     this.marginCall = marginCall;
     this.marginStop = marginStop;
+    this.minimumOrderVolume = minimumOrderVolume;
   }
 
   public String getAltName() {
@@ -164,6 +167,11 @@ public class KrakenAssetPair {
     return marginStop;
   }
 
+  public BigDecimal getMinimumOrderVolume() {
+
+    return minimumOrderVolume;
+  }
+
   @Override
   public String toString() {
 
@@ -199,6 +207,8 @@ public class KrakenAssetPair {
         + marginCall
         + ", marginStop="
         + marginStop
+        + ", minimumOrderVolume="
+        + minimumOrderVolume
         + "]";
   }
 }

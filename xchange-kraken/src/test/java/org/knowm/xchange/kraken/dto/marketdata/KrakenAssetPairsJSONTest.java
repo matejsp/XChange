@@ -44,7 +44,8 @@ public class KrakenAssetPairsJSONTest {
             new BigDecimal(80),
             new BigDecimal(40),
             leverage_buy,
-            leverage_sell);
+            leverage_sell,
+            null);
   }
 
   @Test
