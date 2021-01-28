@@ -5,10 +5,11 @@
     <parent>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-parent</artifactId>
-        <version>5.0.6-SNAPSHOT</version>
+        <version>5.0.5</version>
     </parent>
 
     <artifactId>xchange-bitfinex</artifactId>
+    <version>5.0.5-SNAPSHOT</version>
 
     <name>XChange BitFinex</name>
     <description>XChange implementation for the BitFinex Exchange</description>
@@ -27,7 +28,7 @@
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
-            <version>${project.version}</version>
+            <version>5.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
