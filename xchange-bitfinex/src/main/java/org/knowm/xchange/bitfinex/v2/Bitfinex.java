@@ -19,8 +19,21 @@ import org.knowm.xchange.bitfinex.v2.dto.marketdata.Status;
 public interface Bitfinex {
 
   @GET
+  @Path("platform/status")
+  List<Integer> getPlatformStatus() throws IOException, BitfinexExceptionV2;
+
+  @GET
   @Path("tickers")
   List<ArrayNode> getTickers(@QueryParam("symbols") String symbols)
+      throws IOException, BitfinexExceptionV2;
+
+  @GET
+  @Path("ticker/{ticker}")
+  ArrayNode getTicker(@PathParam("ticker") String ticker) throws IOException, BitfinexExceptionV2;
+
+  @GET
+  @Path("tickers/hist")
+  List<ArrayNode> getTickersHistory(@QueryParam("symbols") String symbols)
       throws IOException, BitfinexExceptionV2;
 
   @GET
@@ -46,5 +59,13 @@ public interface Bitfinex {
       @QueryParam("start") long startTimestamp,
       @QueryParam("end") long endTimestamp,
       @QueryParam("sort") int sort)
+      throws IOException, BitfinexExceptionV2;
+
+  @GET
+  @Path("/book/{symbol}/{precision}")
+  List<ArrayNode> getBook(
+      @PathParam("symbol") String fundingSymbol,
+      @PathParam("precision") String precision,
+      @QueryParam("len") int len)
       throws IOException, BitfinexExceptionV2;
 }

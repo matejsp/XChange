@@ -39,6 +39,7 @@ import org.knowm.xchange.bitfinex.v1.dto.trade.BitfinexReplaceOrderRequest;
 import org.knowm.xchange.bitfinex.v1.dto.trade.BitfinexTradeResponse;
 import org.knowm.xchange.bitfinex.v2.dto.EmptyRequest;
 import org.knowm.xchange.bitfinex.v2.dto.trade.ActiveOrder;
+import org.knowm.xchange.bitfinex.v2.dto.trade.ListOfIdsRequest;
 import org.knowm.xchange.bitfinex.v2.dto.trade.OrderTrade;
 import org.knowm.xchange.bitfinex.v2.dto.trade.Position;
 import org.knowm.xchange.bitfinex.v2.dto.trade.Trade;
@@ -521,7 +522,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
       symbol = ""; // for empty symbol all active orders are returned
     }
     return bitfinexV2.getActiveOrders(
-        exchange.getNonceFactory(), apiKey, signatureV2, symbol, EmptyRequest.INSTANCE);
+        exchange.getNonceFactory(), apiKey, signatureV2, symbol, new ListOfIdsRequest());
   }
 
   public List<OrderTrade> getBitfinexOrderTradesV2(final String symbol, final Long orderId)

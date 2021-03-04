@@ -67,6 +67,14 @@ public class ActiveOrder {
   /** If another order caused this order to be placed (OCO) this will be that other order's ID */
   private Long placedId;
 
+  private Object placeHolder7;
+  private Object placeHolder8;
+  private Object placeHolder9;
+  private String routing;
+  private Object placeHolder10;
+  private Object placeHolder11;
+  private Object meta;
+
   public Date getTimestampCreate() {
     return new Date(timestampCreate);
   }

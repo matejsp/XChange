@@ -15,9 +15,14 @@ import org.knowm.xchange.bitfinex.v2.dto.EmptyRequest;
 import org.knowm.xchange.bitfinex.v2.dto.account.LedgerEntry;
 import org.knowm.xchange.bitfinex.v2.dto.account.Movement;
 import org.knowm.xchange.bitfinex.v2.dto.trade.ActiveOrder;
+import org.knowm.xchange.bitfinex.v2.dto.trade.CancelOrder;
+import org.knowm.xchange.bitfinex.v2.dto.trade.ListOfIdsRequest;
+import org.knowm.xchange.bitfinex.v2.dto.trade.NewOrder;
 import org.knowm.xchange.bitfinex.v2.dto.trade.OrderTrade;
 import org.knowm.xchange.bitfinex.v2.dto.trade.Position;
+import org.knowm.xchange.bitfinex.v2.dto.trade.Response;
 import org.knowm.xchange.bitfinex.v2.dto.trade.Trade;
+import org.knowm.xchange.bitfinex.v2.dto.trade.UpdateOrder;
 import si.mazi.rescu.ParamsDigest;
 import si.mazi.rescu.SynchronizedValueFactory;
 
@@ -26,9 +31,9 @@ import si.mazi.rescu.SynchronizedValueFactory;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface BitfinexAuthenticated extends Bitfinex {
 
-  public static final String BFX_APIKEY = "bfx-apikey";
-  public static final String BFX_SIGNATURE = "bfx-signature";
-  public static final String BFX_NONCE = "bfx-nonce";
+  String BFX_APIKEY = "bfx-apikey";
+  String BFX_SIGNATURE = "bfx-signature";
+  String BFX_NONCE = "bfx-nonce";
 
   /** https://docs.bitfinex.com/v2/reference#rest-auth-positions */
   @POST
@@ -83,7 +88,70 @@ public interface BitfinexAuthenticated extends Bitfinex {
       @HeaderParam(BFX_APIKEY) String apiKey,
       @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
       @PathParam("symbol") String symbol,
-      EmptyRequest empty)
+      ListOfIdsRequest listOfIdsRequest)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/r/orders")
+  List<ActiveOrder> getActiveOrders(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      ListOfIdsRequest empty)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/r/orders/{symbol}/hist")
+  List<ActiveOrder> getOrders(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      @PathParam("symbol") String symbol,
+      @QueryParam("start") Long startTimeMillis,
+      @QueryParam("end") Long endTimeMillis,
+      @QueryParam("limit") Long limit,
+      @QueryParam("id") List<Long> ids,
+      EmptyRequest emptyRequest)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/r/orders/hist")
+  List<ActiveOrder> getOrders(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      @QueryParam("start") Long startTimeMillis,
+      @QueryParam("end") Long endTimeMillis,
+      @QueryParam("limit") Long limit,
+      @QueryParam("id") List<Long> ids,
+      EmptyRequest emptyRequest)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/w/orders/submit")
+  Response<ActiveOrder> submitOrder(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      NewOrder order)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/w/orders/update")
+  Response<ActiveOrder> updateOrder(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      UpdateOrder order)
+      throws IOException, BitfinexExceptionV2;
+
+  @POST
+  @Path("auth/w/orders/cancel")
+  Response<ActiveOrder> cancelOrder(
+      @HeaderParam(BFX_NONCE) SynchronizedValueFactory<Long> nonce,
+      @HeaderParam(BFX_APIKEY) String apiKey,
+      @HeaderParam(BFX_SIGNATURE) ParamsDigest signature,
+      CancelOrder order)
       throws IOException, BitfinexExceptionV2;
 
   /** https://docs.bitfinex.com/reference#rest-auth-ledgers */
