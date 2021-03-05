@@ -6,10 +6,11 @@
     <parent>
         <groupId>org.knowm.xchange</groupId>
         <artifactId>xchange-parent</artifactId>
-        <version>5.0.7-SNAPSHOT</version>
+        <version>5.0.6</version>
     </parent>
 
     <artifactId>xchange-huobi</artifactId>
+    <version>5.0.7-ICN</version>
 
     <name>XChange Huobi</name>
     <description>XChange implementation for the Huobi Exchange</description>
@@ -27,7 +28,7 @@
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
-            <version>${project.version}</version>
+            <version>5.0.6</version>
         </dependency>
 
     </dependencies>
