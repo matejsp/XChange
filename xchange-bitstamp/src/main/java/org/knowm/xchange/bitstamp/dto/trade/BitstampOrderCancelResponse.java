@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 
 public class BitstampOrderCancelResponse {
 
-  private long id;
+  private final long id;
   /** 0 - buy (bid); 1 - sell (ask) */
-  private int type;
+  private final int type;
 
-  private BigDecimal price;
-  private BigDecimal amount;
+  private final BigDecimal price;
+  private final BigDecimal amount;
+
+  private final String currencyPair;
 
   private final String error;
 
@@ -26,12 +28,14 @@ public class BitstampOrderCancelResponse {
       @JsonProperty("type") int type,
       @JsonProperty("price") BigDecimal price,
       @JsonProperty("amount") BigDecimal amount,
+      @JsonProperty("currency_pair") String currencyPair,
       @JsonProperty("error") String error) {
 
     this.id = id;
     this.type = type;
     this.price = price;
     this.amount = amount;
+    this.currencyPair = currencyPair;
     this.error = error;
   }
 
@@ -54,4 +58,9 @@ public class BitstampOrderCancelResponse {
   public String getError() {
     return error;
   }
+
+  public String getCurrencyPair() {
+    return currencyPair;
+  }
+
 }

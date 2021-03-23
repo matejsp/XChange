@@ -15,6 +15,7 @@ import org.knowm.xchange.bitstamp.dto.account.BitstampBalance;
 import org.knowm.xchange.bitstamp.dto.account.BitstampWithdrawal;
 import org.knowm.xchange.bitstamp.dto.account.WithdrawalRequest;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampOrder;
+import org.knowm.xchange.bitstamp.dto.trade.BitstampOrderCancelAllResponse;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampOrderCancelResponse;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampOrderStatusResponse;
 import org.knowm.xchange.bitstamp.dto.trade.BitstampUserTransaction;
@@ -75,6 +76,23 @@ public interface BitstampAuthenticatedV2 {
       @FormParam("nonce") SynchronizedValueFactory<Long> nonce,
       @FormParam("id") long orderId)
       throws BitstampException, IOException;
+
+  @POST
+  @Path("cancel_all_orders/")
+  BitstampOrderCancelAllResponse cancelAllOrders(
+          @FormParam("key") String apiKey,
+          @FormParam("signature") ParamsDigest signer,
+          @FormParam("nonce") SynchronizedValueFactory<Long> nonce)
+          throws BitstampException, IOException;
+
+  @POST
+  @Path("cancel_all_orders/{pair}/")
+  BitstampOrderCancelAllResponse cancelAllOrders(
+          @FormParam("key") String apiKey,
+          @FormParam("signature") ParamsDigest signer,
+          @FormParam("nonce") SynchronizedValueFactory<Long> nonce,
+          @PathParam("pair") BitstampV2.Pair pair)
+          throws BitstampException, IOException;
 
   @POST
   @Path("order_status/")

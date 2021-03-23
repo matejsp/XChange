@@ -3,7 +3,6 @@ package org.knowm.xchange.bitstamp.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import org.knowm.xchange.Exchange;
-import org.knowm.xchange.bitstamp.BitstampAuthenticated;
 import org.knowm.xchange.bitstamp.BitstampAuthenticatedV2;
 import org.knowm.xchange.bitstamp.BitstampV2;
 import org.knowm.xchange.bitstamp.dto.BitstampException;
@@ -18,7 +17,6 @@ import si.mazi.rescu.SynchronizedValueFactory;
 /** @author gnandiga */
 public class BitstampTradeServiceRaw extends BitstampBaseService {
 
-  private final BitstampAuthenticated bitstampAuthenticated;
   private final BitstampAuthenticatedV2 bitstampAuthenticatedV2;
   private final BitstampDigest signatureCreator;
   private final String apiKey;
@@ -27,10 +25,6 @@ public class BitstampTradeServiceRaw extends BitstampBaseService {
   public BitstampTradeServiceRaw(Exchange exchange) {
 
     super(exchange);
-    this.bitstampAuthenticated =
-        ExchangeRestProxyBuilder.forInterface(
-                BitstampAuthenticated.class, exchange.getExchangeSpecification())
-            .build();
     this.bitstampAuthenticatedV2 =
         ExchangeRestProxyBuilder.forInterface(
                 BitstampAuthenticatedV2.class, exchange.getExchangeSpecification())
@@ -108,7 +102,7 @@ public class BitstampTradeServiceRaw extends BitstampBaseService {
   public boolean cancelAllBitstampOrders() throws IOException {
 
     try {
-      return bitstampAuthenticated.cancelAllOrders(apiKey, signatureCreator, nonceFactory);
+      return bitstampAuthenticatedV2.cancelAllOrders(apiKey, signatureCreator, nonceFactory).isSuccess();
     } catch (BitstampException e) {
       throw handleError(e);
     }
