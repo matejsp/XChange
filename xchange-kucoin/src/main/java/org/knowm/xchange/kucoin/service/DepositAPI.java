@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -47,6 +48,17 @@ public interface DepositAPI {
       @QueryParam("currentPage") Integer currentPage,
       @QueryParam("pageSize") Integer pageSize)
       throws IOException;
+
+  @POST
+  @Path("/v1/deposit-addresses")
+  KucoinResponse<DepositAddressResponse> createDepositAddress(
+          @HeaderParam(APIConstants.API_HEADER_KEY) String apiKey,
+          @HeaderParam(APIConstants.API_HEADER_SIGN) ParamsDigest signature,
+          @HeaderParam(APIConstants.API_HEADER_TIMESTAMP) SynchronizedValueFactory<Long> nonce,
+          @HeaderParam(APIConstants.API_HEADER_PASSPHRASE) String apiPassphrase,
+          @QueryParam("currency") String currency,
+          @QueryParam("chain") String chain
+  ) throws IOException;
 
   @GET
   @Path("/v1/deposit-addresses")

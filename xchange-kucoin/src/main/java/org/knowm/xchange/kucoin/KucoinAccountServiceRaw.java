@@ -118,6 +118,21 @@ public class KucoinAccountServiceRaw extends KucoinBaseService {
                 currentPage));
   }
 
+  public DepositAddressResponse createDepositAddress(
+          String currency, String chain)
+          throws IOException {
+    checkAuthenticated();
+    return classifyingExceptions(
+            () ->
+                    depositAPI.createDepositAddress(
+                            apiKey,
+                            digest,
+                            nonceFactory,
+                            passphrase,
+                            currency,
+                            chain));
+  }
+
   public DepositAddressResponse getDepositAddress(
           String currency, String chain)
           throws IOException {
