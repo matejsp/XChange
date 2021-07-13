@@ -41,7 +41,7 @@ public class KucoinMarketDataServiceRaw extends KucoinBaseService {
   public List<TradeFeeResponse> getKucoinTradeFee(String symbols) throws IOException {
     checkAuthenticated();
     return classifyingExceptions(
-            () -> tradingFeeAPI.getTradeFee(symbols, apiKey, digest, nonceFactory, passphrase));
+            () -> tradingFeeAPI.getTradeFee(apiKey, digest, nonceFactory, passphrase, symbols));
   }
 
   public List<SymbolResponse> getKucoinSymbols() throws IOException {
